@@ -13,6 +13,7 @@ namespace Tela_de_Login
 {
     public partial class Login: Form
     {
+        public static int IdFuncionarioLogado; 
         public Login()
         {
             InitializeComponent();
@@ -52,6 +53,7 @@ namespace Tela_de_Login
                         {
                             if (reader.Read())
                             {
+                                IdFuncionarioLogado = reader.GetInt32(reader.GetOrdinal("id_funcionario"));
                                 string nome = reader.GetString(reader.GetOrdinal("nome"));
                                 string departamento = reader.GetString(reader.GetOrdinal("departamento"));
 
