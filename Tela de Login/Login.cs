@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
+
 
 namespace Tela_de_Login
 {
     public partial class Login: Form
     {
+        public static int IdFuncionarioLogado; 
         public Login()
         {
             InitializeComponent();
@@ -29,53 +30,28 @@ namespace Tela_de_Login
                 return;
             }
 
-            string conexaoString = "Host=localhost;Port=5432;Database=pim;User ID=postgres;Password=belofode";
+            Entrar login = new Entrar();
+            var resultado = login.Autenticar(email, senha);
 
-            try
+            if (resultado.sucesso)
             {
-                using (var conexao = new Npgsql.NpgsqlConnection(conexaoString))
-                {
-                    conexao.Open();
+                IdFuncionarioLogado = resultado.idFuncionario;
+                MessageBox.Show($"Bem-vindo(a), {resultado.nome}!\nDepartamento: {resultado.departamento}",
+                                resultado.mensagem,
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    string query = @"
-                SELECT f.id_funcionario, f.nome, f.email, d.nome AS departamento
-                FROM funcionario f
-                INNER JOIN departamento d ON f.id_departamento = d.id_departamento
-                WHERE f.email = @usuario AND f.senha = @senha";
-
-                    using (var comando = new Npgsql.NpgsqlCommand(query, conexao))
-                    {
-                        comando.Parameters.AddWithValue("@usuario", email);
-                        comando.Parameters.AddWithValue("@senha", senha);
-
-                        using (var reader = comando.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                string nome = reader.GetString(reader.GetOrdinal("nome"));
-                                string departamento = reader.GetString(reader.GetOrdinal("departamento"));
-
-                                MessageBox.Show($"Bem-vindo(a), {nome}!\nDepartamento: {departamento}", "Login realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                                var chamados = new Chamados_Historico();
-                                chamados.Show();
-                                this.Hide();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Senha ou Email incorretos", "Ops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                txtEmail.Focus();
-                                txtSenha.Text = "";
-                            }
-                        }
-                    }
-                }
+                var chamados = new Chamados_Historico();
+                chamados.Show();
+                this.Hide();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resultado.mensagem, "Ops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                txtSenha.Text = "";
             }
         }
+
 
 
         private void textEmail_TextChanged(object sender, EventArgs e)
@@ -109,6 +85,13 @@ namespace Tela_de_Login
             cadastrar.Show();
 
             this.Visible = false;
+        }
+
+
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

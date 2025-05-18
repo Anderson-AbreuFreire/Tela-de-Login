@@ -54,7 +54,7 @@ namespace Tela_de_Login
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(153, 461);
             this.panel1.TabIndex = 0;
@@ -87,7 +87,7 @@ namespace Tela_de_Login
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(153, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(305, 461);
             this.panel2.TabIndex = 0;
@@ -113,9 +113,9 @@ namespace Tela_de_Login
             "Produção",
             "Gerência"});
             this.checkedListBox1.Location = new System.Drawing.Point(32, 221);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(91, 34);
+            this.checkedListBox1.Size = new System.Drawing.Size(104, 49);
             this.checkedListBox1.TabIndex = 6;
             // 
             // BtnCancelarCadastro
@@ -123,11 +123,11 @@ namespace Tela_de_Login
             this.BtnCancelarCadastro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnCancelarCadastro.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCancelarCadastro.Location = new System.Drawing.Point(156, 357);
-            this.BtnCancelarCadastro.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnCancelarCadastro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnCancelarCadastro.Name = "BtnCancelarCadastro";
             this.BtnCancelarCadastro.Size = new System.Drawing.Size(90, 32);
             this.BtnCancelarCadastro.TabIndex = 9;
-            this.BtnCancelarCadastro.Text = "Cancelar";
+            this.BtnCancelarCadastro.Text = "Voltar";
             this.BtnCancelarCadastro.UseMnemonic = false;
             this.BtnCancelarCadastro.UseVisualStyleBackColor = false;
             this.BtnCancelarCadastro.Click += new System.EventHandler(this.BtnCancelarCadastro_Click);
@@ -137,7 +137,7 @@ namespace Tela_de_Login
             this.BtnCadastrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BtnCadastrar.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCadastrar.Location = new System.Drawing.Point(36, 357);
-            this.BtnCadastrar.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnCadastrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnCadastrar.Name = "BtnCadastrar";
             this.BtnCadastrar.Size = new System.Drawing.Size(90, 32);
             this.BtnCadastrar.TabIndex = 9;
@@ -148,7 +148,7 @@ namespace Tela_de_Login
             // txtSenhaCad
             // 
             this.txtSenhaCad.Location = new System.Drawing.Point(32, 294);
-            this.txtSenhaCad.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSenhaCad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSenhaCad.Name = "txtSenhaCad";
             this.txtSenhaCad.Size = new System.Drawing.Size(132, 20);
             this.txtSenhaCad.TabIndex = 8;
@@ -157,7 +157,7 @@ namespace Tela_de_Login
             // txtEmailCad
             // 
             this.txtEmailCad.Location = new System.Drawing.Point(32, 164);
-            this.txtEmailCad.Margin = new System.Windows.Forms.Padding(2);
+            this.txtEmailCad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtEmailCad.Name = "txtEmailCad";
             this.txtEmailCad.Size = new System.Drawing.Size(132, 20);
             this.txtEmailCad.TabIndex = 4;
@@ -186,7 +186,7 @@ namespace Tela_de_Login
             // txtNome
             // 
             this.txtNome.Location = new System.Drawing.Point(32, 118);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(132, 20);
             this.txtNome.TabIndex = 2;
@@ -217,11 +217,11 @@ namespace Tela_de_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 422);
+            this.ClientSize = new System.Drawing.Size(458, 461);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximumSize = new System.Drawing.Size(458, 461);
             this.MinimumSize = new System.Drawing.Size(458, 461);
             this.Name = "TelaCadastro";

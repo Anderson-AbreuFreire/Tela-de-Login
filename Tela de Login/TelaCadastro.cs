@@ -11,36 +11,58 @@ namespace Tela_de_Login
         public TelaCadastro()
         {
             InitializeComponent();
-            
         }
 
         private void BtnCadastrar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNome.Text))
+            string nome = txtNome.Text;
+            string email = txtEmailCad.Text;
+            string senha = txtSenhaCad.Text;
+
+            if (string.IsNullOrWhiteSpace(nome) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(senha))
             {
-                MessageBox.Show("O campo Nome é obrigatório.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNome.Focus();
+                MessageBox.Show("Preencha todos os campos.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(txtEmailCad.Text))
-            {
-                MessageBox.Show("O campo Email é obrigatório.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtEmailCad.Focus();
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtSenhaCad.Text))
-            {
-                MessageBox.Show("O campo Senha é obrigatório.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtSenhaCad.Focus();
-                return;
-            }
+
             if (checkedListBox1.CheckedItems.Count == 0)
             {
                 MessageBox.Show("Selecione pelo menos um Departamento.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                checkedListBox1.Focus();
                 return;
             }
+
+            string departamentoSelecionado = checkedListBox1.CheckedItems[0].ToString();
+
+            try
+            {
+                Cadastro cadastro = new Cadastro();
+                int idDepartamento = cadastro.ObterIdDepartamento(departamentoSelecionado);
+
+                if (idDepartamento == 0)
+                {
+                    MessageBox.Show("Departamento inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (cadastro.VerificarEmailExistente(email))
+                {
+                    MessageBox.Show("Este email já está cadastrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int idFuncionario = cadastro.CadastrarFuncionario(nome, email, senha, idDepartamento);
+                MessageBox.Show($"Cadastro realizado com sucesso!\nID: {idFuncionario}", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LimparCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao cadastrar: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private int ObterIdDepartamento(string departamento)
         {
@@ -86,30 +108,29 @@ namespace Tela_de_Login
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void BtnCancelarCadastro_Click(object sender, EventArgs e)
         {
             var TelaLogin = new Login();
-                TelaLogin.Show();
-
+            TelaLogin.Show();
             this.Close();
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void TelaCadastro_Load(object sender, EventArgs e)
         {
-           
+
         }
     }
 }
