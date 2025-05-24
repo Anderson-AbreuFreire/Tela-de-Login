@@ -42,7 +42,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(92, 135);
+            this.label1.Location = new System.Drawing.Point(93, 135);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 16);
             this.label1.TabIndex = 0;
@@ -50,10 +50,11 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(95, 154);
+            this.txtEmail.Location = new System.Drawing.Point(97, 154);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtEmail.MaxLength = 50;
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(198, 22);
+            this.txtEmail.Size = new System.Drawing.Size(199, 22);
             this.txtEmail.TabIndex = 1;
             this.txtEmail.TextChanged += new System.EventHandler(this.textEmail_TextChanged);
             this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmail_KeyPress);
@@ -61,13 +62,14 @@
             // BtnEntrar
             // 
             this.BtnEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.BtnEntrar.Font = new System.Drawing.Font("Bauhaus 93", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnEntrar.ForeColor = System.Drawing.Color.White;
-            this.BtnEntrar.Location = new System.Drawing.Point(95, 285);
+            this.BtnEntrar.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnEntrar.ForeColor = System.Drawing.Color.Black;
+            this.BtnEntrar.Location = new System.Drawing.Point(95, 286);
+            this.BtnEntrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnEntrar.Name = "BtnEntrar";
-            this.BtnEntrar.Size = new System.Drawing.Size(198, 38);
+            this.BtnEntrar.Size = new System.Drawing.Size(197, 38);
             this.BtnEntrar.TabIndex = 4;
-            this.BtnEntrar.Text = "&Entrar";
+            this.BtnEntrar.Text = "Entrar";
             this.BtnEntrar.UseVisualStyleBackColor = false;
             this.BtnEntrar.Click += new System.EventHandler(this.BtnEntrar_Click);
             // 
@@ -82,9 +84,10 @@
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(95, 231);
+            this.txtSenha.Location = new System.Drawing.Point(96, 231);
+            this.txtSenha.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(198, 22);
+            this.txtSenha.Size = new System.Drawing.Size(199, 22);
             this.txtSenha.TabIndex = 3;
             this.txtSenha.UseSystemPasswordChar = true;
             // 
@@ -99,29 +102,35 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(388, 433);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(387, 431);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // BtnCadastrar
             // 
+            this.BtnCadastrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.BtnCadastrar.ForeColor = System.Drawing.Color.Black;
             this.BtnCadastrar.Location = new System.Drawing.Point(96, 348);
+            this.BtnCadastrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnCadastrar.Name = "BtnCadastrar";
             this.BtnCadastrar.Size = new System.Drawing.Size(197, 37);
             this.BtnCadastrar.TabIndex = 6;
-            this.BtnCadastrar.Text = "Criar Cadastro";
-            this.BtnCadastrar.UseVisualStyleBackColor = true;
+            this.BtnCadastrar.Text = "&Criar Cadastro";
+            this.BtnCadastrar.UseVisualStyleBackColor = false;
             this.BtnCadastrar.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(106, 9);
+            this.label3.Location = new System.Drawing.Point(123, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(177, 114);
+            this.label3.Size = new System.Drawing.Size(145, 90);
             this.label3.TabIndex = 5;
             this.label3.Text = "NE";
             // 
@@ -129,12 +138,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 433);
+            this.ClientSize = new System.Drawing.Size(387, 431);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
-            this.MaximumSize = new System.Drawing.Size(406, 480);
-            this.MinimumSize = new System.Drawing.Size(406, 480);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(405, 478);
+            this.MinimumSize = new System.Drawing.Size(405, 478);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
+using Tela_de_Login.Classes;
 
 namespace Tela_de_Login
 {
-    public partial class Login: Form
+    public partial class Login : Form
     {
+        public static int IdFuncionarioLogado;
+
         public Login()
         {
             InitializeComponent();
@@ -29,76 +24,56 @@ namespace Tela_de_Login
                 return;
             }
 
-            string conexaoString = "Host=localhost;Port=5432;Database=pim;User ID=postgres;Password=belofode";
+            Autenticador autenticador = new Autenticador();
+            var resultado = autenticador.Autenticar(email, senha);
 
-            try
+            if (resultado.sucesso)
             {
-                using (var conexao = new Npgsql.NpgsqlConnection(conexaoString))
-                {
-                    conexao.Open();
+                IdFuncionarioLogado = resultado.funcionario.Id;
 
-                    string query = @"
-                SELECT f.id_funcionario, f.nome, f.email, d.nome AS departamento
-                FROM funcionario f
-                INNER JOIN departamento d ON f.id_departamento = d.id_departamento
-                WHERE f.email = @usuario AND f.senha = @senha";
 
-                    using (var comando = new Npgsql.NpgsqlCommand(query, conexao))
-                    {
-                        comando.Parameters.AddWithValue("@usuario", email);
-                        comando.Parameters.AddWithValue("@senha", senha);
+                string nomeDepartamento = NomeDepartamentoPorId(resultado.funcionario.IdDepartamento);
 
-                        using (var reader = comando.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                string nome = reader.GetString(reader.GetOrdinal("nome"));
-                                string departamento = reader.GetString(reader.GetOrdinal("departamento"));
+                MessageBox.Show(
+                    $"Bem-vindo(a), {resultado.funcionario.Nome}!\nDepartamento: {nomeDepartamento}",
+                    resultado.mensagem,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                MessageBox.Show($"Bem-vindo(a), {nome}!\nDepartamento: {departamento}", "Login realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                                var chamados = new Chamados_Historico();
-                                chamados.Show();
-                                this.Hide();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Senha ou Email incorretos", "Ops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                txtEmail.Focus();
-                                txtSenha.Text = "";
-                            }
-                        }
-                    }
-                }
+                var chamados = new Chamados_Historico();
+                chamados.Show();
+                this.Hide();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resultado.mensagem, "Ops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                txtSenha.Text = "";
             }
         }
 
-
-        private void textEmail_TextChanged(object sender, EventArgs e)
+        private string NomeDepartamentoPorId(int idDepartamento)
         {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            switch (idDepartamento)
+            {
+                case 1:
+                    return "RH";
+                case 2:
+                    return "Produção";
+                case 3:
+                    return "Gerência";
+                default:
+                    return "Desconhecido";
+            }
         }
 
         private void txtEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            int tecla = (int)e.KeyChar; 
+            int tecla = (int)e.KeyChar;
 
-            if(!char.IsLetterOrDigit(e.KeyChar) && tecla != 64 && tecla != 08 && tecla != 46)
+            if (!char.IsLetterOrDigit(e.KeyChar) && tecla != 64 && tecla != 08 && tecla != 46)
             {
                 e.Handled = true;
-                MessageBox.Show("Digite somente letras e números", 
-                                "Ops", MessageBoxButtons.OK, 
-                                MessageBoxIcon.Warning);
-
+                MessageBox.Show("Digite somente letras e números", "Ops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtEmail.Focus();
             }
         }
@@ -107,8 +82,11 @@ namespace Tela_de_Login
         {
             var cadastrar = new TelaCadastro();
             cadastrar.Show();
-
             this.Visible = false;
         }
+
+        private void textEmail_TextChanged(object sender, EventArgs e) { }
+        private void Form1_Load(object sender, EventArgs e) { }
+        private void groupBox1_Enter(object sender, EventArgs e) { }
     }
 }
