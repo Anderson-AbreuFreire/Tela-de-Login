@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using Npgsql;
+using Tela_de_Login.Classes;
 
 namespace Tela_de_Login
 {
     public partial class TelaCadastro : Form
     {
-        private string conexaoString = "Host=localhost;Port=5432;Database=pim;User ID=postgres;Password=belofode";
-
         public TelaCadastro()
         {
             InitializeComponent();
@@ -15,10 +13,9 @@ namespace Tela_de_Login
 
         private void BtnCadastrar_Click(object sender, EventArgs e)
         {
-            string nome = txtNome.Text;
-            string email = txtEmailCad.Text;
-            string senha = txtSenhaCad.Text;
-
+            string nome = txtNome.Text.Trim();
+            string email = txtEmailCad.Text.Trim();
+            string senha = txtSenhaCad.Text.Trim();
             if (string.IsNullOrWhiteSpace(nome) ||
                 string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(senha))
@@ -38,6 +35,7 @@ namespace Tela_de_Login
             try
             {
                 Cadastro cadastro = new Cadastro();
+
                 int idDepartamento = cadastro.ObterIdDepartamento(departamentoSelecionado);
 
                 if (idDepartamento == 0)
@@ -52,7 +50,10 @@ namespace Tela_de_Login
                     return;
                 }
 
-                int idFuncionario = cadastro.CadastrarFuncionario(nome, email, senha, idDepartamento);
+                Funcionario funcionario = new Funcionario(0, nome, email, senha, idDepartamento);
+
+                int idFuncionario = cadastro.CadastrarFuncionario(funcionario);
+
                 MessageBox.Show($"Cadastro realizado com sucesso!\nID: {idFuncionario}", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimparCampos();
@@ -60,22 +61,6 @@ namespace Tela_de_Login
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao cadastrar: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private int ObterIdDepartamento(string departamento)
-        {
-            switch (departamento.ToLower())
-            {
-                case "rh":
-                    return 1;
-                case "produção":
-                    return 2;
-                case "gerência":
-                    return 3;
-                default:
-                    return 0;
             }
         }
 
@@ -98,22 +83,9 @@ namespace Tela_de_Login
             if (!char.IsLetterOrDigit(e.KeyChar) && tecla != 64 && tecla != 08 && tecla != 46)
             {
                 e.Handled = true;
-                MessageBox.Show("Digite somente letras e números",
-                                "Ops", MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-
+                MessageBox.Show("Digite somente letras e números", "Ops", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtEmailCad.Focus();
             }
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void BtnCancelarCadastro_Click(object sender, EventArgs e)
@@ -123,14 +95,9 @@ namespace Tela_de_Login
             this.Close();
         }
 
-        private void txtNome_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void TelaCadastro_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e) { }
+        private void button2_Click(object sender, EventArgs e) { }
+        private void txtNome_TextChanged(object sender, EventArgs e) { }
+        private void TelaCadastro_Load(object sender, EventArgs e) { }
     }
 }
