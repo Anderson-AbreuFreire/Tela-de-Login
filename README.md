@@ -25,7 +25,8 @@ Antes de executar o projeto, certifique-se de ter:
 
 ## 🔌 String de Conexão
 
-A string de conexão agora está centralizada na classe `Conexao.cs`:
+A string de conexão está localizada em `Conexao.cs`:
+Reajuste de acordo com as credênciais do seu banco de dados
 
 ```csharp
 public static class Conexao
