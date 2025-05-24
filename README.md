@@ -1,7 +1,7 @@
-# Sistema de Chamados - PIM
+# Sistema de Chamados - PIM 3 Semestre ADS
 
 Este projeto é um sistema básico de gerenciamento de chamados com autenticação de usuários, utilizando C# com PostgreSQL.
-
+As senhas são armazenadas como texto puro apenas para fins didáticos se for usar troque para um sistema de segurança usando hash
 ---
 
 ## ✅ Requisitos
@@ -26,7 +26,7 @@ Antes de executar o projeto, certifique-se de ter:
 ## 🔌 String de Conexão
 
 A string de conexão está localizada em `Conexao.cs`:
-Reajuste de acordo com as credênciais do seu banco de dados
+Reajuste de acordo com as credênciais de seu banco de dados
 
 ```csharp
 public static class Conexao
